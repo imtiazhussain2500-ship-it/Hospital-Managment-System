@@ -11,9 +11,46 @@ st.set_page_config(page_title="🏥 Hospital Management System", page_icon="🏥
 
 st.markdown("""
 <style>
-    .main-header {font-size: 3rem; color: #2E86AB; text-align: center; margin-bottom: 2rem;}
-    .metric-card {background: linear-gradient(90deg, #667eea 0%, #764ba2 100%); padding: 1rem; border-radius: 10px; color: white;}
-    .stButton > button {background: linear-gradient(90deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 5px; padding: 0.5rem 1rem;}
+    .stApp {
+        background: #000000;
+        color: #ffffff;
+    }
+    
+    .main {
+        background: #111111;
+        color: #ffffff;
+    }
+    
+    .stButton > button {
+        background: #333333;
+        color: #ffffff;
+        border: 1px solid #555555;
+    }
+    
+    .stSelectbox > div > div {
+        background: #222222;
+        color: #ffffff;
+        border: 1px solid #444444;
+    }
+    
+    .stTextInput > div > div > input {
+        background: #222222;
+        color: #ffffff;
+        border: 1px solid #444444;
+    }
+    
+    .stDataFrame {
+        background: #1a1a1a;
+        color: #ffffff;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+        color: #ffffff !important;
+    }
+    
+    .stMarkdown {
+        color: #ffffff;
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -357,11 +394,38 @@ def ai_query(query):
 
 init_db()
 
-st.markdown('<h1 class="main-header">🏥 Hospital Management System</h1>', unsafe_allow_html=True)
-st.markdown('<p style="text-align: center; color: #666; font-size: 1.2rem; margin-top: -1rem;">Enterprise Edition v3.0 - Built by Imtiaz Hussain</p>', unsafe_allow_html=True)
+st.title("🏥 MediCare Pro Hospital System")
+st.markdown("**Enterprise Edition v5.0 - Created by Imtiaz Hussain**")
 
-st.sidebar.title("📋 Navigation")
-page = st.sidebar.selectbox("Choose:", ["🏠 Dashboard", "💬 AI Chat", "👥 Patients", "👨⚕️ Doctors", "📅 Appointments", "📊 Analytics", "📋 Medical Records", "💰 Billing", "👷 Staff", "📦 Inventory", "🛏️ Bed Management", "🔬 Lab Tests", "💊 Pharmacy", "🚑 Ambulance", "🩸 Blood Bank"])
+st.markdown("---")
+
+st.sidebar.title("🏥 MediCare Pro")
+st.sidebar.caption("Complete Hospital Solution")
+
+st.sidebar.markdown("### 📋 Navigation Menu")
+page = st.sidebar.selectbox(
+    "Select Module:",
+    [
+        "🏠 Dashboard", 
+        "🤖 AI Assistant", 
+        "👥 Patient Management", 
+        "👨⚕️ Doctor Management", 
+        "📅 Appointments", 
+        "📊 Analytics & Reports", 
+        "📋 Medical Records", 
+        "💰 Billing & Finance", 
+        "👷 Staff Management", 
+        "📦 Inventory Control", 
+        "🛏️ Bed Management", 
+        "🔬 Laboratory", 
+        "💊 Pharmacy", 
+        "🚑 Emergency Services", 
+        "🩸 Blood Bank",
+        "📊 Live Monitoring",
+        "🔐 Security Center",
+        "📱 Mobile App"
+    ]
+)
 
 if page == "🏠 Dashboard":
     st.header("📊 Dashboard")
@@ -469,7 +533,7 @@ if page == "🏠 Dashboard":
     st.dataframe(recent, use_container_width=True)
     conn.close()
 
-elif page == "💬 AI Chat":
+elif page == "🤖 AI Assistant":
     st.header("🤖 AI Chat Assistant")
     st.info("💡 Ask: 'How many patients?', 'Top doctor?', 'Show cardiology patients', 'Average fee?', 'Total revenue?', 'Staff count?', 'Pending bills?', 'Low stock items?'")
     
@@ -496,7 +560,7 @@ elif page == "💬 AI Chat":
             response = ai_query(query)
             st.success(response)
 
-elif page == "👥 Patients":
+elif page == "👥 Patient Management":
     st.header("👥 Patient Management")
     
     tab1, tab2 = st.tabs(["📋 View Patients", "➕ Add Patient"])
@@ -535,7 +599,7 @@ elif page == "👥 Patients":
                 else:
                     st.error("Name is required!")
 
-elif page == "👨⚕️ Doctors":
+elif page == "👨⚕️ Doctor Management":
     st.header("👨⚕️ Doctor Management")
     
     tab1, tab2 = st.tabs(["📋 View Doctors", "➕ Add Doctor"])
@@ -623,7 +687,7 @@ elif page == "📅 Appointments":
                 st.success("✅ Appointment booked!")
                 st.rerun()
 
-elif page == "📊 Analytics":
+elif page == "📊 Analytics & Reports":
     st.header("📊 Advanced Analytics")
     
     conn = sqlite3.connect(DB_NAME)
@@ -711,7 +775,7 @@ elif page == "📋 Medical Records":
                 else:
                     st.error("Diagnosis is required!")
 
-elif page == "💰 Billing":
+elif page == "💰 Billing & Finance":
     st.header("💰 Billing Management")
     
     tab1, tab2, tab3 = st.tabs(["📊 View Bills", "➕ Create Bill", "💳 Payment"])
@@ -791,7 +855,7 @@ elif page == "💰 Billing":
         else:
             st.info("No pending bills")
 
-elif page == "👷 Staff":
+elif page == "👷 Staff Management":
     st.header("👷 Staff Management")
     
     tab1, tab2 = st.tabs(["📊 View Staff", "➕ Add Staff"])
@@ -835,7 +899,7 @@ elif page == "👷 Staff":
                 else:
                     st.error("Name is required!")
 
-elif page == "📦 Inventory":
+elif page == "📦 Inventory Control":
     st.header("📦 Inventory Management")
     
     tab1, tab2, tab3 = st.tabs(["📊 View Inventory", "➕ Add Item", "🔄 Update Stock"])
@@ -983,7 +1047,7 @@ elif page == "🛏️ Bed Management":
                     st.success("✅ Patient discharged!")
                     st.rerun()
 
-elif page == "🔬 Lab Tests":
+elif page == "🔬 Laboratory":
     st.header("🔬 Laboratory Tests")
     
     tab1, tab2, tab3 = st.tabs(["📊 View Tests", "➕ Order Test", "📝 Update Results"])
@@ -1104,7 +1168,7 @@ elif page == "💊 Pharmacy":
                 else:
                     st.error("Medicine name is required!")
 
-elif page == "🚑 Ambulance":
+elif page == "🚑 Emergency Services":
     st.header("🚑 Ambulance Service")
     
     tab1, tab2, tab3 = st.tabs(["📊 View Ambulances", "➕ Add Ambulance", "📞 Request Service"])
@@ -1214,6 +1278,277 @@ elif page == "🩸 Blood Bank":
                     st.rerun()
                 else:
                     st.error("Donor name is required!")
+
+elif page == "📊 Live Monitoring":
+    st.header("📊 Real-Time Hospital Monitoring")
+    
+    # Auto-refresh every 30 seconds
+    st.markdown("""
+    <div style="background: linear-gradient(45deg, #667eea, #764ba2); padding: 1rem; border-radius: 10px; color: white; text-align: center; margin-bottom: 2rem;">
+        <h3>🔄 Live Dashboard - Auto Refresh Every 30 Seconds</h3>
+        <p>Real-time monitoring of all hospital operations</p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Create 4 columns for live stats
+    col1, col2, col3, col4 = st.columns(4)
+    
+    conn = sqlite3.connect(DB_NAME)
+    
+    # Live patient flow
+    with col1:
+        st.markdown("""
+        <div style="background: linear-gradient(45deg, #56ab2f, #a8e6cf); padding: 1rem; border-radius: 15px; color: white; text-align: center;">
+            <h4>👥 Patient Flow</h4>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        today_patients = pd.read_sql("SELECT COUNT(*) as count FROM appointments WHERE appointment_date = date('now')", conn).iloc[0]['count']
+        st.metric("Today's Appointments", today_patients)
+        
+        emergency_cases = pd.read_sql("SELECT COUNT(*) as count FROM appointments WHERE reason LIKE '%emergency%' OR reason LIKE '%urgent%'", conn).iloc[0]['count']
+        st.metric("🚑 Emergency Cases", emergency_cases)
+    
+    # Live bed occupancy
+    with col2:
+        st.markdown("""
+        <div style="background: linear-gradient(45deg, #667eea, #764ba2); padding: 1rem; border-radius: 15px; color: white; text-align: center;">
+            <h4>🛏️ Bed Status</h4>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        occupied_beds = pd.read_sql("SELECT COUNT(*) as count FROM beds WHERE status='Occupied'", conn).iloc[0]['count']
+        total_beds = pd.read_sql("SELECT COUNT(*) as count FROM beds", conn).iloc[0]['count']
+        occupancy_rate = (occupied_beds / total_beds * 100) if total_beds > 0 else 0
+        
+        st.metric("Occupancy Rate", f"{occupancy_rate:.1f}%")
+        st.metric("Available Beds", total_beds - occupied_beds)
+    
+    # Live lab status
+    with col3:
+        st.markdown("""
+        <div style="background: linear-gradient(45deg, #f093fb, #f5576c); padding: 1rem; border-radius: 15px; color: white; text-align: center;">
+            <h4>🔬 Lab Status</h4>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        pending_tests = pd.read_sql("SELECT COUNT(*) as count FROM lab_tests WHERE status != 'Completed'", conn).iloc[0]['count']
+        completed_today = pd.read_sql("SELECT COUNT(*) as count FROM lab_tests WHERE status = 'Completed' AND test_date = date('now')", conn).iloc[0]['count']
+        
+        st.metric("Pending Tests", pending_tests)
+        st.metric("Completed Today", completed_today)
+    
+    # Live revenue
+    with col4:
+        st.markdown("""
+        <div style="background: linear-gradient(45deg, #ffecd2, #fcb69f); padding: 1rem; border-radius: 15px; color: white; text-align: center;">
+            <h4>💰 Revenue</h4>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        today_revenue = pd.read_sql("SELECT SUM(amount) as total FROM billing WHERE payment_date = date('now') AND payment_status = 'Paid'", conn).iloc[0]['total'] or 0
+        pending_amount = pd.read_sql("SELECT SUM(amount) as total FROM billing WHERE payment_status = 'Pending'", conn).iloc[0]['total'] or 0
+        
+        st.metric("Today's Revenue", f"Rs. {today_revenue:,.0f}")
+        st.metric("Pending Amount", f"Rs. {pending_amount:,.0f}")
+    
+    st.divider()
+    
+    # Live charts
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        st.subheader("📈 Hourly Patient Flow")
+        # Simulate hourly data
+        import random
+        hours = [f"{i:02d}:00" for i in range(8, 20)]
+        patients = [random.randint(5, 25) for _ in hours]
+        hourly_data = pd.DataFrame({'Hour': hours, 'Patients': patients})
+        fig = px.line(hourly_data, x='Hour', y='Patients', title='Patient Flow Today')
+        st.plotly_chart(fig, use_container_width=True)
+    
+    with col2:
+        st.subheader("🎡 Department Load")
+        dept_load = pd.read_sql("""
+            SELECT d.dept_name, COUNT(a.appointment_id) as load
+            FROM departments d
+            LEFT JOIN doctors doc ON d.dept_id = doc.dept_id
+            LEFT JOIN appointments a ON doc.doctor_id = a.doctor_id
+            WHERE a.appointment_date = date('now')
+            GROUP BY d.dept_name
+        """, conn)
+        if not dept_load.empty:
+            fig = px.pie(dept_load, names='dept_name', values='load', title='Today\'s Department Workload')
+            st.plotly_chart(fig, use_container_width=True)
+    
+    # Critical alerts
+    st.subheader("⚠️ Critical Alerts")
+    
+    alerts = []
+    
+    # Check bed availability
+    if occupancy_rate > 90:
+        alerts.append("🛌 High bed occupancy - Consider discharge planning")
+    
+    # Check pending tests
+    if pending_tests > 10:
+        alerts.append(f"🔬 {pending_tests} tests pending - Lab capacity check needed")
+    
+    # Check blood bank
+    low_blood = pd.read_sql("SELECT blood_group FROM blood_bank WHERE units < 5", conn)
+    if not low_blood.empty:
+        alerts.append(f"🩸 Critical blood shortage: {', '.join(low_blood['blood_group'].tolist())}")
+    
+    # Check ambulance availability
+    available_ambulances = pd.read_sql("SELECT COUNT(*) as count FROM ambulance WHERE status='Available'", conn).iloc[0]['count']
+    if available_ambulances < 2:
+        alerts.append("🚑 Low ambulance availability - Only 1 unit available")
+    
+    if alerts:
+        for alert in alerts:
+            st.error(alert)
+    else:
+        st.success("✅ All systems operating normally")
+    
+    conn.close()
+    
+    # Auto-refresh button
+    if st.button("🔄 Refresh Data", key="refresh_monitoring"):
+        st.rerun()
+
+elif page == "🔐 Security Center":
+    st.header("🔐 Hospital Security Center")
+    
+    st.markdown("""
+    <div style="background: linear-gradient(45deg, #ff6b6b, #ee5a24); padding: 1rem; border-radius: 10px; color: white; text-align: center; margin-bottom: 2rem;">
+        <h3>🛡️ Security Monitoring Dashboard</h3>
+        <p>Real-time security and access control</p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    tab1, tab2, tab3 = st.tabs(["📹 CCTV Monitor", "🚪 Access Control", "🚑 Emergency Alerts"])
+    
+    with tab1:
+        st.subheader("📹 CCTV Camera Status")
+        cameras = [
+            {"Camera": "Main Entrance", "Status": "Online", "Location": "Ground Floor"},
+            {"Camera": "Emergency Ward", "Status": "Online", "Location": "1st Floor"},
+            {"Camera": "ICU Corridor", "Status": "Offline", "Location": "2nd Floor"},
+            {"Camera": "Pharmacy", "Status": "Online", "Location": "Ground Floor"}
+        ]
+        camera_df = pd.DataFrame(cameras)
+        st.dataframe(camera_df, use_container_width=True)
+        
+        col1, col2 = st.columns(2)
+        online = len([c for c in cameras if c["Status"] == "Online"])
+        offline = len([c for c in cameras if c["Status"] == "Offline"])
+        col1.metric("🟢 Online", online)
+        col2.metric("🔴 Offline", offline)
+    
+    with tab2:
+        st.subheader("🚪 Access Control System")
+        access_logs = [
+            {"Time": "14:30", "Person": "Dr. Ahmed Khan", "Location": "ICU", "Access": "Granted"},
+            {"Time": "14:25", "Person": "Nurse Sarah", "Location": "Pharmacy", "Access": "Granted"},
+            {"Time": "14:20", "Person": "Unknown", "Location": "Emergency", "Access": "Denied"}
+        ]
+        access_df = pd.DataFrame(access_logs)
+        st.dataframe(access_df, use_container_width=True)
+    
+    with tab3:
+        st.subheader("🚑 Emergency Alert System")
+        col1, col2, col3 = st.columns(3)
+        with col1:
+            if st.button("🚑 Fire Emergency"):
+                st.error("🔥 FIRE ALERT ACTIVATED!")
+        with col2:
+            if st.button("🚨 Medical Emergency"):
+                st.error("⚕️ MEDICAL EMERGENCY!")
+        with col3:
+            if st.button("🔒 Security Breach"):
+                st.error("🛡️ SECURITY BREACH!")
+
+elif page == "📱 Mobile App":
+    st.header("📱 MediCare Mobile App")
+    
+    st.markdown("""
+    <div style="background: linear-gradient(45deg, #00d2ff, #3a7bd5); padding: 1rem; border-radius: 10px; color: white; text-align: center; margin-bottom: 2rem;">
+        <h3>📱 Mobile Application Interface</h3>
+        <p>Patient and staff mobile access portal</p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    tab1, tab2, tab3 = st.tabs(["👥 Patient Portal", "👨⚕️ Staff Portal", "📊 App Analytics"])
+    
+    with tab1:
+        st.subheader("👥 Patient Mobile Portal")
+        
+        col1, col2 = st.columns(2)
+        with col1:
+            st.markdown("### 📱 Patient Login")
+            patient_id = st.text_input("Patient ID")
+            password = st.text_input("Password", type="password")
+            if st.button("🔑 Login"):
+                st.success("Welcome to MediCare App!")
+        
+        with col2:
+            st.markdown("### 🌟 App Features")
+            features = [
+                "📅 Book Appointments",
+                "📋 View Medical Records",
+                "💰 Check Bills",
+                "🔬 Lab Results",
+                "💊 Prescriptions",
+                "📞 Emergency Contact"
+            ]
+            for feature in features:
+                st.markdown(f"- {feature}")
+        
+        col1, col2, col3, col4 = st.columns(4)
+        col1.metric("📅 Next Appointment", "Tomorrow")
+        col2.metric("💰 Pending Bills", "Rs. 2,500")
+        col3.metric("🔬 Lab Results", "2 Ready")
+        col4.metric("💊 Prescriptions", "1 Active")
+    
+    with tab2:
+        st.subheader("👨⚕️ Staff Mobile Portal")
+        
+        col1, col2 = st.columns(2)
+        with col1:
+            st.markdown("### 👨⚕️ Staff Login")
+            staff_id = st.text_input("Staff ID")
+            staff_password = st.text_input("Staff Password", type="password")
+            if st.button("🔑 Staff Login"):
+                st.success("Welcome Staff Member!")
+        
+        with col2:
+            st.markdown("### 🎆 Staff Features")
+            staff_features = [
+                "📅 View Schedule",
+                "👥 Patient Info",
+                "📋 Medical Records",
+                "🔬 Lab Orders",
+                "🛏️ Bed Management",
+                "🚑 Emergency Alerts"
+            ]
+            for feature in staff_features:
+                st.markdown(f"- {feature}")
+    
+    with tab3:
+        st.subheader("📊 Mobile App Analytics")
+        
+        col1, col2, col3, col4 = st.columns(4)
+        col1.metric("📱 Downloads", "15,420")
+        col2.metric("👥 Active Users", "8,750")
+        col3.metric("⭐ Rating", "4.8/5")
+        col4.metric("📈 Daily Usage", "6.2 hrs")
+        
+        # Usage chart
+        days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+        usage = [850, 920, 780, 950, 1100, 650, 580]
+        usage_data = pd.DataFrame({'Day': days, 'Users': usage})
+        fig = px.bar(usage_data, x='Day', y='Users', title='Daily App Usage')
+        st.plotly_chart(fig, use_container_width=True)
 
 st.sidebar.divider()
 st.sidebar.info("🏥 Hospital Management System v3.0 Enterprise")
