@@ -358,6 +358,7 @@ def ai_query(query):
 init_db()
 
 st.markdown('<h1 class="main-header">🏥 Hospital Management System</h1>', unsafe_allow_html=True)
+st.markdown('<p style="text-align: center; color: #666; font-size: 1.2rem; margin-top: -1rem;">Enterprise Edition v3.0 - Built by Imtiaz Hussain</p>', unsafe_allow_html=True)
 
 st.sidebar.title("📋 Navigation")
 page = st.sidebar.selectbox("Choose:", ["🏠 Dashboard", "💬 AI Chat", "👥 Patients", "👨⚕️ Doctors", "📅 Appointments", "📊 Analytics", "📋 Medical Records", "💰 Billing", "👷 Staff", "📦 Inventory", "🛏️ Bed Management", "🔬 Lab Tests", "💊 Pharmacy", "🚑 Ambulance", "🩸 Blood Bank"])
@@ -1218,3 +1219,28 @@ st.sidebar.divider()
 st.sidebar.info("🏥 Hospital Management System v3.0 Enterprise")
 st.sidebar.success(f"📅 {datetime.now().strftime('%d %B %Y')}")
 st.sidebar.metric("🕒 Time", datetime.now().strftime('%I:%M %p'))
+
+st.sidebar.divider()
+st.sidebar.markdown("""
+### 👨‍💻 Developer Info
+**Created by:** Imtiaz Hussain  
+**Version:** 3.0 Enterprise  
+**Build Date:** March 2024  
+**Tech Stack:** Python, Streamlit, SQLite  
+**Features:** 15 Modules, 11 Tables  
+
+🚀 **Full Hospital Management System**
+""")
+
+st.sidebar.markdown("""
+### 🏆 System Stats
+- 📊 15 Management Modules
+- 🗄️ 11 Database Tables  
+- 💰 Complete Billing System
+- 🛏️ Bed Management (IPD/OPD)
+- 🔬 Laboratory Tests
+- 💊 Pharmacy Management
+- 🚑 Ambulance Service
+- 🩸 Blood Bank
+- 🤖 AI Chat Assistant
+""")

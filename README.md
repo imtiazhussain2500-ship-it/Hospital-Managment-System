@@ -1,4 +1,8 @@
-# 🏥 Hospital Management System - Advanced Edition
+# 🏥 Hospital Management System - Enterprise Edition
+
+**Created by: Imtiaz Hussain**  
+**Version: 3.0 Enterprise**  
+**Build: March 2024**
 
 A complete enterprise-grade hospital management system built with Streamlit and SQLite.
 
